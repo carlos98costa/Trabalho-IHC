@@ -86,6 +86,21 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Sair':
         break
 
+    if event == 'Sobre':
+        sg.popup('Temos banho e tosa, veterinário, e muito mais para seu pet,'
+                 ' sem contar com a facilidade do estacionamento na porta, lugar privilegiado'
+                 ',e uma loja divertida ... pra cachorro !!', text_color='purple', title='Sobre')
+
+    if event == 'Equipe':
+        sg.popup('Nossa equipe ... ', text_color='purple', title='Equipe')
+
+    if event == 'Contato':
+        sg.popup('Instagram: @petShopMi-Au \n'
+                 'WhatsApp: (16)99999-9999 \n'
+                 'E-mail: petshopmi-au@petshop.com \n'
+                 'Telefone: (16)3333-3333', text_color='purple', title='Contato')
+
+
     if window == janela1 and event == 'Logar':
         janela1.hide()
         janela2 = janela_login()
@@ -134,8 +149,6 @@ while True:
     if window == janela3 and event == 'Marcar consulta':
         janela3.hide()
         janela6 = janela_marcar_consulta()
-        print('Recebeu janela 6')
-
 
     new_list = []
     if window == janela6 and event == '-FILTER-':
@@ -154,5 +167,9 @@ while True:
 
     if window == janela6 and event == 'Agendar':
         sg.popup('Consulta agendada com sucesso!')
+        janela6.hide()
+        janela3.un_hide()
+
+    if window == janela6 and event == 'Voltar':
         janela6.hide()
         janela3.un_hide()
