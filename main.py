@@ -10,13 +10,13 @@ pets3 = ['Hamster1', 'Coelho1', 'Cachorro1', 'Gato1', 'Gato2']
 def janela_inicial():
     sg.theme('LightGray1')
     menu_def = [["Menu", ["Sobre", "Equipe", "Contato"]]]
-    layout_register = [[sg.MenubarCustom(menu_def, background_color='purple', bar_text_color='purple')],
-                        [sg.T('Bem-vindo ao Pet Shop Mi-Au', text_color='purple' ,font='_ 18', justification='c', expand_x=True)],
+    layout_inicial = [[sg.MenubarCustom(menu_def, background_color='purple', bar_text_color='purple')],
+                        [sg.T('Bem-vindo ao Clinica Veterinária Mi-Au', text_color='purple' ,font='_ 18', justification='c', expand_x=True)],
                         [sg.Image('gato-cachorro2.png')],
                        [sg.Ok('Logar', button_color='purple'), sg.Cancel('Sair', button_color='red')]
                        ]
 
-    return sg.Window('Pet Shop Mi-Au - Inicio', layout=layout_register, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Inicio', layout=layout_inicial, finalize=True)
 
 def janela_login():
     sg.theme('LightGray1')
@@ -26,7 +26,7 @@ def janela_login():
                        [sg.Ok('Logar', button_color='purple'), sg.Cancel('Voltar', button_color='gray')]
                        ]
 
-    return sg.Window('Pet Shop Mi-Au - Login', layout=layout_login, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Login', layout=layout_login, finalize=True)
 
 def janela_secretario():
     sg.theme('LightGray1')
@@ -34,20 +34,20 @@ def janela_secretario():
                         [sg.Button('Marcar consulta', button_color='purple'), sg.Button('Consultas agendadas', button_color='purple')],
                         [sg.Button('Voltar', button_color='gray')]]
 
-    return sg.Window('Pet Shop Mi-Au - Painel Secretario', layout=layout_secretario, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Painel Secretario', layout=layout_secretario, finalize=True)
 
 def janela_cadastrar():
     sg.theme('LightGray1')
-    layout_marcar_consulta = [[sg.T('Painel do Secretario - Cadastrar', font=40)],
+    layout_marcar_consulta = [[sg.T('Painel do Secretario - Cadastrar', font=40, text_color='purple')],
                         [sg.Ok('Manter cliente', button_color='purple'), sg.Ok('Manter animal', button_color='purple')],
                         [sg.Ok('Voltar')]]
 
-    return sg.Window('Pet Shop Mi-Au - Cadastrar', layout=layout_marcar_consulta, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Cadastrar', layout=layout_marcar_consulta, finalize=True)
 
 
 def janela_marcar_consulta():
     sg.theme('LightGray1')
-    layout_marcar_consulta = [[sg.T('Painel do Secretario - Marcar consulta', font=40)],
+    layout_marcar_consulta = [[sg.T('Painel do Secretario - Marcar consulta', font=40, text_color='purple')],
                               [sg.T('Cliente'), sg.LB(listaClientes, size=(10, 4), k='-LCLIENTES-', enable_events=True),
                                sg.T('Pet'), sg.LB(listPets, size=(10, 4), k='-LPETS-', enable_events=True),
                                sg.T('Veterinario'), sg.LB(listVets, size=(10, 4), k='-LVETS-', enable_events=True)
@@ -57,27 +57,33 @@ def janela_marcar_consulta():
                                sg.T(size=(15, 1), k='-FILTER NUMBER-')],
                             [sg.Ok('Manter cliente'), sg.Ok('Manter animal'), sg.Button('Cadastrar cliente', button_color='purple'),
                              sg.Button('Agendar', button_color='purple')],
-                            [sg.Ok('Voltar')]]
+                            [sg.Ok('Voltar', button_color='gray')]]
 
-    return sg.Window('Pet Shop Mi-Au - Marcar consulta', layout=layout_marcar_consulta, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Marcar consulta', layout=layout_marcar_consulta, finalize=True)
 
 
 def janela_veterinario():
     sg.theme('LightGray1')
-    layout_veterinario= [[sg.T('Painel do Veterinario', font=40)],
+    layout_veterinario= [[sg.T('Painel do Veterinario', font=40, text_color='purple')],
                         [sg.Ok('Realizar consulta', button_color='purple'), sg.Button('Consultas agendadas', button_color='purple')],
                          [sg.Cancel('Voltar', button_color='gray')]]
 
-    return sg.Window('Pet Shop Mi-Au - Veterinario', layout=layout_veterinario, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Veterinario', layout=layout_veterinario, finalize=True)
 
 def janela_consulta():
     sg.theme('LightGray1')
     layout_consulta= [[sg.T('Painel do Veterinario - Consulta', font=40, text_color='purple')],
-                      [sg.Ok('Informações do animal', button_color='purple')],
+                      [sg.Ok('Informações do Pet', button_color='purple')],
                         [sg.Ok('Marcar exame', button_color='purple')],
                          [sg.Ok('Finalizar consulta', button_color='purple'), sg.Cancel('Voltar', button_color='gray')]]
 
-    return sg.Window('Pet Shop Mi-Au - Veterinario Consulta', layout=layout_consulta, finalize=True)
+    return sg.Window('Clinica Veterinária Mi-Au - Veterinario Consulta', layout=layout_consulta, finalize=True)
+
+#layout = [
+    #[sg.Column(layout=janela_inicial, key='-C1-'),
+    #sg.Column(layout=janela_login, k='-C2-')]]
+
+#window = sg.Window('Clinica Veterinária Mi-Au - Inicio/Login', layout)
 
 janela1, janela2, janela3, janela4, janela5, janela6 = janela_inicial(), None, None, None, None, None
 
@@ -95,9 +101,9 @@ while True:
         sg.popup('Nossa equipe ... ', text_color='purple', title='Equipe')
 
     if event == 'Contato':
-        sg.popup('Instagram: @petShopMi-Au \n'
+        sg.popup('Instagram: @clinicavetMi-Au \n'
                  'WhatsApp: (16)99999-9999 \n'
-                 'E-mail: petshopmi-au@petshop.com \n'
+                 'E-mail: clinicavetmi-au@vet.com \n'
                  'Telefone: (16)3333-3333', text_color='purple', title='Contato')
 
 
