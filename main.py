@@ -6,6 +6,7 @@ listVets = ['Vet1', 'Vet2']
 pets1 = ['Cachorro1', 'Gato1']
 pets2 = ['Cachorro1', 'Gato1', 'Hamster1']
 pets3 = ['Hamster1', 'Coelho1', 'Cachorro1', 'Gato1', 'Gato2']
+especies = ['Cachorro','Coelho','Gato', 'Hamster', 'Pássaros']
 
 def janela_inicial():
     sg.theme('LightGray1')
@@ -13,7 +14,7 @@ def janela_inicial():
     layout_inicial = [[sg.MenubarCustom(menu_def, background_color='purple', bar_text_color='purple')],
                         [sg.T('Bem-vindo ao Clinica Veterinária Mi-Au', text_color='purple' ,font='_ 18', justification='c', expand_x=True)],
                         [sg.Image('gato-cachorro2.png')],
-                       [sg.Ok('Logar', button_color='purple'), sg.Cancel('Sair', button_color='red')]
+                       [sg.Cancel('Sair', button_color='red'), sg.Ok('Logar', button_color='purple')]
                        ]
 
     return sg.Window('Clinica Veterinária Mi-Au - Inicio', layout=layout_inicial, finalize=True)
@@ -23,7 +24,7 @@ def janela_login():
     layout_login = [[sg.T('Fazer Login', font=40, text_color='purple')],
                         [sg.Text("Usuario:", text_color='purple'), sg.Input("", k='-LOGIN-')],
                        [sg.Text("Senha:", text_color='purple'), sg.Input("", k='-SENHA-', password_char="*")],
-                       [sg.Ok('Logar', button_color='purple'), sg.Cancel('Voltar', button_color='gray')]
+                       [sg.Cancel('Voltar', button_color='gray'), sg.Ok('Logar', button_color='purple')]
                        ]
 
     return sg.Window('Clinica Veterinária Mi-Au - Login', layout=layout_login, finalize=True)
@@ -39,11 +40,53 @@ def janela_secretario():
 def janela_cadastrar():
     sg.theme('LightGray1')
     layout_marcar_consulta = [[sg.T('Painel do Secretario - Cadastrar', font=40, text_color='purple')],
-                        [sg.Ok('Manter cliente', button_color='purple'), sg.Ok('Manter animal', button_color='purple')],
-                        [sg.Ok('Voltar')]]
+                        [sg.Ok('Cadastrar cliente', button_color='purple'), sg.Ok('Cadastrar pet', button_color='purple')],
+                              [sg.Ok('Cadastrar veterinario', button_color='purple'),
+                               sg.Ok('Cadastrar especies', button_color='purple')],
+                        [sg.Ok('Voltar', button_color='gray')]]
 
     return sg.Window('Clinica Veterinária Mi-Au - Cadastrar', layout=layout_marcar_consulta, finalize=True)
 
+def cadastro_cliente():
+    sg.theme('LightGray1')
+    layout_cad_cliente = [[sg.T('Painel do Secretario - Cadastrar cliente', font=40, text_color='purple')],
+                        [sg.T('Nome:'), sg.Input()],
+                        [sg.T('Endereço:'), sg.Input()],
+                          [sg.T('Celular:'), sg.Input()],
+                          [sg.T('CPF'), sg.Input()],
+                         [sg.Ok('Cancelar', button_color='gray'), sg.Button('Enviar', button_color='purple')]]
+
+    return sg.Window('Clinica Veterinária Mi-Au - Cadastrar cliente', layout=layout_cad_cliente, finalize=True)
+
+def cadastro_vet():
+    sg.theme('LightGray1')
+    layout_cad_vet = [[sg.T('Painel do Secretario - Cadastrar veterinario', font=40, text_color='purple')],
+                        [sg.T('Nome:'), sg.Input()],
+                        [sg.T('CFMV:'), sg.Input()],
+                        [sg.T('Endereço'), sg.Input()],
+                        [sg.T('Celular:'), sg.Input()],
+                        [sg.Ok('Cancelar', button_color='gray'), sg.Button('Enviar', button_color='purple')]]
+
+    return sg.Window('Clinica Veterinária Mi-Au - Cadastrar cliente', layout=layout_cad_vet, finalize=True)
+
+def cadastro_pet():
+    sg.theme('LightGray1')
+    layout_cad_pet = [[sg.T('Painel do Secretario - Cadastrar pet', font=40, text_color='purple')],
+                      [sg.T('Cliente'), sg.LB(listaClientes, size=(10, 4), k='-LCLIENTES-', enable_events=True), sg.Button('Adicionar cliente', button_color='purple')],
+                        [sg.T('Nome do pet:'), sg.Input()],
+                        [sg.T('Especie:'), sg.Input()],
+                         [sg.Ok('Cancelar', button_color='gray'), sg.Button('Enviar', button_color='purple')]]
+
+    return sg.Window('Clinica Veterinária Mi-Au - Cadastrar pet', layout=layout_cad_pet, finalize=True)
+
+def cadastro_especies():
+    sg.theme('LightGray1')
+    layout_cad_especie = [[sg.T('Painel do Secretario - Cadastrar especie', font=40, text_color='purple')],
+                      [sg.T('Cliente'), sg.LB(listVets, size=(10, 4), enable_events=True), sg.Button('Adicionar veterinario', button_color='purple')],
+                        [sg.T('Especie:'), sg.Input()],
+                         [sg.Ok('Cancelar', button_color='gray'), sg.Button('Enviar', button_color='purple')]]
+
+    return sg.Window('Clinica Veterinária Mi-Au - Cadastrar especies', layout=layout_cad_especie, finalize=True)
 
 def janela_marcar_consulta():
     sg.theme('LightGray1')
@@ -55,9 +98,8 @@ def janela_marcar_consulta():
                               [sg.T('Buscar cliente pelo nome'),
                                sg.Input(size=(25, 1), enable_events=True, key='-FILTER-'),
                                sg.T(size=(15, 1), k='-FILTER NUMBER-')],
-                            [sg.Ok('Manter cliente'), sg.Ok('Manter animal'), sg.Button('Cadastrar cliente', button_color='purple'),
-                             sg.Button('Agendar', button_color='purple')],
-                            [sg.Ok('Voltar', button_color='gray')]]
+                            [sg.Button('Cadastrar', button_color='purple')],
+                            [sg.Ok('Cancelar', button_color='gray'), sg.Button('Agendar', button_color='purple')]]
 
     return sg.Window('Clinica Veterinária Mi-Au - Marcar consulta', layout=layout_marcar_consulta, finalize=True)
 
@@ -79,13 +121,9 @@ def janela_consulta():
 
     return sg.Window('Clinica Veterinária Mi-Au - Veterinario Consulta', layout=layout_consulta, finalize=True)
 
-#layout = [
-    #[sg.Column(layout=janela_inicial, key='-C1-'),
-    #sg.Column(layout=janela_login, k='-C2-')]]
 
-#window = sg.Window('Clinica Veterinária Mi-Au - Inicio/Login', layout)
-
-janela1, janela2, janela3, janela4, janela5, janela6 = janela_inicial(), None, None, None, None, None
+janela1, janela2, janela3, janela4, janela5, janela6, janela7, janela8, janela9, janela10 \
+    = janela_inicial(), None, None, None, None, None, None, None, None, None
 
 while True:
     window, event, values = sg.read_all_windows()
@@ -144,7 +182,7 @@ while True:
         janela4.hide()
         janela3.un_hide()
 
-    if event == 'Cadastrar cliente':
+    if event == 'Cadastrar':
         janela5 = janela_cadastrar()
         janela6.hide()
 
@@ -176,6 +214,52 @@ while True:
         janela6.hide()
         janela3.un_hide()
 
-    if window == janela6 and event == 'Voltar':
+    if window == janela6 and event == 'Cancelar':
         janela6.hide()
         janela3.un_hide()
+    if window == janela5 and event == 'Cadastrar cliente':
+        janela5.hide()
+        janela7 = cadastro_cliente()
+    if window == janela7 and event == 'Enviar':
+        sg.popup('Cliente cadastrado com sucesso!')
+        janela7.hide()
+        janela5.un_hide()
+    if window == janela7 and event == 'Cancelar':
+        janela7.hide()
+        janela5.un_hide()
+    if window == janela5 and event == 'Cadastrar pet':
+        janela5.hide()
+        janela8 = cadastro_pet()
+    if window == janela8 and event == 'Adicionar cliente':
+        janela8.hide()
+        janela7 = cadastro_cliente()
+    if window == janela8 and event == 'Enviar':
+        sg.popup('Pet cadastrado com sucesso!')
+        janela8.hide()
+        janela5.un_hide()
+    if window == janela8 and event == 'Cancelar':
+        janela8.hide()
+        janela5.un_hide()
+    if window == janela5 and event == 'Cadastrar veterinario':
+        janela5.hide()
+        janela9 = cadastro_vet()
+    if window == janela5 and event == 'Cadastrar especies':
+        janela5.hide()
+        janela10 = cadastro_especies()
+    if window == janela10 and event == 'Adicionar veterinario':
+        janela10.hide()
+        janela9 = cadastro_vet()
+    if window == janela10 and event == 'Enviar':
+        sg.popup('Especie cadastrada com sucesso!')
+        janela10.hide()
+        janela5.un_hide()
+    if window == janela10 and event == 'Cancelar':
+        janela10.hide()
+        janela5.un_hide()
+    if window == janela9 and event == 'Enviar':
+        sg.popup('Veterinario cadastrado com sucesso!')
+        janela9.hide()
+        janela5.un_hide()
+    if window == janela9 and event == 'Cancelar':
+        janela9.hide()
+        janela5.un_hide()
