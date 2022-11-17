@@ -131,12 +131,10 @@ while True:
         break
 
     if event == 'Sobre':
-        sg.popup('Temos banho e tosa, veterinário, e muito mais para seu pet,'
-                 ' sem contar com a facilidade do estacionamento na porta, lugar privilegiado'
-                 ',e uma loja divertida ... pra cachorro !!', text_color='purple', title='Sobre')
+        sg.popup('Trabalhando com o compromisso de preservar a vida, contamos com profissionais experientes e qualificados, procurando sempre manter uma estreita relação de confiança e satisfação com nossos clientes e pacientes. !!', text_color='purple', title='Sobre')
 
     if event == 'Equipe':
-        sg.popup('Nossa equipe ... ', text_color='purple', title='Equipe')
+        sg.popup('Nossa equipe é formada por veterinarios conceituados, que trabalham sempre com zelo e amor! ', text_color='purple', title='Equipe')
 
     if event == 'Contato':
         sg.popup('Instagram: @clinicavetMi-Au \n'
